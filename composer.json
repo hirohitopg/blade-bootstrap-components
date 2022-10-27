@@ -1,7 +1,8 @@
 {
-    "name": "hostmoz/blade-bootstrap-components",
+    "name": "hirohitopg/blade-bootstrap-components",
     "description": "A set of Blade Components based on Boostrap-4 CSS Framework",
     "keywords": [
+        "hirohitopg",
         "backstageel",
         "blade-bootstrap-components",
         "Laravel",
