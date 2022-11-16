@@ -11,7 +11,7 @@
             multiple
         @endif
 
-        {!! $attributes->merge(['class' => 'form-select ' . ($hasError($name) ? 'is-invalid' : '')]) !!}>
+        {!! $attributes->merge(['class' => 'form-select ' . ($hasError($nameDot) ? 'is-invalid' : '')]) !!}>
         @if($empty)
         <option value=""></option>
         @endif
@@ -21,8 +21,9 @@
             </option>
         @endforeach
     </select>
-    @if($hasErrorAndShow($name))
-        <x-bootstrap::form.errors :name="$name" />
+
+    @if($hasErrorAndShow($nameDot))
+        <x-bootstrap::form.errors :name="$nameDot" />
     @endif
 
     {!! $help ?? null !!}

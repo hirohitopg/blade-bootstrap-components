@@ -37,7 +37,7 @@ class Checkbox extends Component
         $this->showErrors = $showErrors;
         $this->divStyle = $divStyle;
 
-        if (old($name)) {
+        if (old($name) === $this->value) {
             $this->checked = true;
         }
 

@@ -13,6 +13,7 @@ class Input extends Component
     public string $name;
     public string $label;
     public string $type;
+    public string $mask;
 
     public $value;
 
@@ -28,11 +29,13 @@ class Input extends Component
         $bind = null,
         $default = null,
         $language = null,
-        bool $showErrors = true
+        bool $showErrors = true,
+        string $mask = ''
     ) {
         $this->name       = $name;
         $this->label      = $label;
         $this->type       = $type;
+        $this->mask       = $mask;
         $this->showErrors = $showErrors;
 
         if ($language) {

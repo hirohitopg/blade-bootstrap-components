@@ -16,7 +16,7 @@
                 value="{{ $value }}"
             @endif
         />
-            <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+            <a href="javascript:;" class="input-group-text bg-transparent"><i class="fa fa-eye"></i></a>
             @if($hasErrorAndShow($name))
                 <x-bootstrap::form.errors :name="$name" />
             @endif
@@ -34,12 +34,12 @@
                     event.preventDefault();
                     if ($('#show_hide_password input').attr("type") == "text") {
                         $('#show_hide_password input').attr('type', 'password');
-                        $('#show_hide_password i').addClass("bx-hide");
-                        $('#show_hide_password i').removeClass("bx-show");
+                        $('#show_hide_password i').addClass("fa-eye");
+                        $('#show_hide_password i').removeClass("fa-eye-slash");
                     } else if ($('#show_hide_password input').attr("type") == "password") {
                         $('#show_hide_password input').attr('type', 'text');
-                        $('#show_hide_password i').removeClass("bx-hide");
-                        $('#show_hide_password i').addClass("bx-show");
+                        $('#show_hide_password i').removeClass("fa-eye");
+                        $('#show_hide_password i').addClass("fa-eye-slash");
                     }
                 });
             });

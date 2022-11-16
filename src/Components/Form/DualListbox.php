@@ -2,6 +2,10 @@
 
 namespace Hostmoz\BladeBootstrapComponents\Components\Form;
 
+use Hostmoz\BladeBootstrapComponents\Components\Component;
+use Hostmoz\BladeBootstrapComponents\Components\HandlesBoundValues;
+use Hostmoz\BladeBootstrapComponents\Components\HandlesValidationErrors;
+
 class DualListbox extends Component
 {
     use HandlesValidationErrors;

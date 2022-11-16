@@ -10,7 +10,7 @@
                {!! $attributes->merge(['class' => 'form-control ' . ($hasError($name) ? 'is-invalid' : '')]) !!} id="{{$name}}"
                name="{{$name}}" value="{{$value}}">
         <div class="input-group-text">
-            <span class="bi bi-calendar-date"></span>
+            <i class="fa fa-calendar-days"></i>
         </div>
         @if($hasErrorAndShow($name))
             <x-bootstrap::form.errors :name="$name"/>
@@ -23,7 +23,6 @@
     @push('styles')
         <link rel="stylesheet" type="text/css"
               href="{{asset('vendor/bootstrap-components/css/bootstrap-datepicker.standalone.min.css')}}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     @endpush
     @push('scripts')
         <script src="{{asset('vendor/bootstrap-components/js/bootstrap-datepicker.min.js')}}"

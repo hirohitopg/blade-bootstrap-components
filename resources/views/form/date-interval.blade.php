@@ -5,7 +5,7 @@
     <div class="input-group m-t-10">
         <div class="input-group-prepend">
             <span class="input-group-text">
-                <i class="fa fa-fw ti-calendar"></i>
+                <i class="fa fa-fw fa-calendar"></i>
             </span>
         </div>
         <input class="form-control" id="{{$nameStart}}" name="{{$nameStart}}"
@@ -19,7 +19,7 @@
     <div class="input-group m-t-10">
         <div class="input-group-prepend">
             <span class="input-group-text">
-                <i class="fa fa-fw ti-calendar"></i>
+                <i class="fa fa-fw fa-calendar"></i>
             </span>
         </div>
         <input class="form-control" id="{{$nameEnd}}" name="{{$nameEnd}}"

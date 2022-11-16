@@ -12,7 +12,7 @@
         multiple
         @endif
 
-        {!! $attributes->merge(['class' => 'form-select ' . ($hasError($name) ? 'is-invalid' : '')]) !!} id="{{$name}}">
+        {!! $attributes->merge(['class' => 'form-select ' . ($hasError($nameDot) ? 'is-invalid' : '')]) !!} id="{{ $nameKebab }}">
         <option></option>
         @foreach($options as $key => $option)
             <option value="{{ $key }}" @if($isSelected($key)) selected="selected" @endif>
@@ -20,36 +20,40 @@
             </option>
         @endforeach
     </select>
-    @if($hasErrorAndShow($name))
-        <x-bootstrap::form.errors :name="$name" />
+    @if($hasErrorAndShow($nameDot))
+        <x-bootstrap::form.errors :name="$nameDot"/>
     @endif
 
     {!! $help ?? null !!}
 </div>
 @once
     @push('styles')
-        <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" />
-        <link href="{{ asset('plugins/select2/css/select2-bootstrap4.css') }}" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css"/>
     @endpush
     @push('scripts')
-        <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @endpush
 @endonce
 
 @push('scripts')
     <script>
         $(document).ready(function () {
-            $('#{!! $name !!}').select2({
-                theme: 'bootstrap4',
-                placeholder:'{!! $placeholder??$label !!}',
-                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            $('#{!! $nameKebab !!}').select2({
+                theme: 'bootstrap-5',
+                placeholder: '{!! $placeholder ?? $label !!}',
                 allowClear: Boolean($(this).data('allow-clear')),
-                minimumInputLength: 3,
+                minimumInputLength: 1,
                 ajax: {
                     url: '{!! $url !!}',
                     dataType: 'json',
                     params: { // extra parameters that will be passed to ajax
                         contentType: 'application/json'
+                    },
+                    data: function (params) {
+                        return {
+                            query: params.term
+                        };
                     },
                     processResults: function (data, params) {
                         // parse the results into the format expected by Select2
@@ -82,9 +86,7 @@
     @push('scripts')
         <script>
             $(document).ready(function () {
-                var selectedKey  = {!! $selectedKey !!};
-
-
+                let selectedKey = {{ Illuminate\Support\Js::from(Arr::wrap($selectedKey)) }};
 
                 // make a request for the selected data object
                 $.ajax({
@@ -95,17 +97,12 @@
                     },
                     dataType: 'json'
                 }).then(function (data) {
-                    var option = new Option(data.name, selectedKey, true, true);
-                    $("#{{$id}}").append(option).trigger('change');
-                    // Here we should have the full data object
-                    option.text = data.name;
-                    option.value = data.id;
-
-                    // create a new option and update Select2
-
+                    $.map(data, function (item) {
+                        $('#{{ $nameKebab }}').append(new Option(item.name, item.id, true, true));
+                    });
 
                     // notify JavaScript components of possible changes
-                    $("#{{$id}}").trigger('change').trigger({
+                    $("#{{ $nameKebab }}").trigger('change').trigger({
                         type: 'select2:select',
                         params: {
                             data: data

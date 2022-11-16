@@ -6,6 +6,7 @@
     use Hostmoz\BladeBootstrapComponents\Components\HandlesValidationErrors;
     use Hostmoz\BladeBootstrapComponents\Components\HandlesBoundValues;
     use Illuminate\Support\Arr;
+    use Illuminate\Support\Str;
 
     class Select2 extends Component
     {
@@ -14,6 +15,8 @@
 
         public string $name;
         public string $label;
+        public string $nameDot;
+        public string $nameKebab;
         public $url;
         public $options;
         public $selectedKey;
@@ -37,6 +40,12 @@
             $this->name    = $name;
             $this->label   = $label;
             $this->options = $options;
+
+            $this->nameDot = str_replace(['[', ']'], ['.', ''], $name);
+            if (Str::endsWith($this->nameDot, '.')) {
+                $this->nameDot = substr_replace($this->nameDot, '', -1);
+            }
+            $this->nameKebab = str_replace('.', '-', $this->nameDot);
 
             if ($this->isNotWired()) {
                 $default = $this->getBoundValue($bind, $name) ?: $default;

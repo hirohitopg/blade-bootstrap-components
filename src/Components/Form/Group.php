@@ -12,6 +12,7 @@
         public string $name;
         public string $label;
         public bool $inline = false;
+        public string $labelClass = '';
 
         /**
          * Create a new component instance.
@@ -22,10 +23,12 @@
             string $name = '',
             string $label = '',
             bool $inline = false,
-            bool $showErrors = true
+            bool $showErrors = true,
+            string $labelClass = ''
         ) {
             $this->name = $name;
             $this->label = $label;
+            $this->labelClass = $labelClass;
             $this->inline = $inline;
             $this->showErrors = $name && $showErrors;
         }
