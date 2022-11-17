@@ -45,12 +45,13 @@
             if (Str::endsWith($this->nameDot, '.')) {
                 $this->nameDot = substr_replace($this->nameDot, '', -1);
             }
+
             $this->nameKebab = str_replace('.', '-', $this->nameDot);
 
             if ($this->isNotWired()) {
-                $default = $this->getBoundValue($bind, $name) ?: $default;
+                $default = $this->getBoundValue($bind, $this->nameDot) ?: $default;
 
-                $this->selectedKey = old($name, $default);
+                $this->selectedKey = old($this->nameDot, $default);
 
             }
 
